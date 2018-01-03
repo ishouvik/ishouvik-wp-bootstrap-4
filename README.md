@@ -1,6 +1,6 @@
-# iShouvik WP - Bootstrap Theme for WordPress
+# iShouvik WP - Bootstrap 4 Starter Theme for WordPress
 
-This is a blank Wordpress Theme Skeleton using Twitter Bootstrap 3 and Fontawesome.
+This is a blank Wordpress Theme Skeleton using Twitter Bootstrap 4.0.0-beta.3 and Fontawesome.
 
 Uses Twitter Bootstrap and FontAwesome CDNs for better performance.
 
