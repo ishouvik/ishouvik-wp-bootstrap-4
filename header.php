@@ -17,17 +17,8 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?> data-spy="scroll" data-target=".bs-docs-sidebar" data-offset="10">
-
-    <div class="site-header">
-        <div class="container">
-            <?php is_logo(); ?>
-            <h2 class="site-description"><?php bloginfo('description'); ?></h2>
-        </div>
-    </div>
-
     <nav id="is-site-navbar-primary" class="navbar navbar-expand-md <?php is_site_primary_nav_class(); ?>">
-
-        <a class="navbar-brand visible-sm d-sm-none d-xs-none" href="<?php echo esc_url( home_url('/') ); ?>">Navigation</a>
+        <?php is_navbar_brand(); ?>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,7 +33,6 @@
                 <i class="fa fa-search"></i>
             </button>
             </form> -->
-            
         </div>
     </nav>
     
@@ -52,4 +42,4 @@
         </div>
     <?php endif; ?>
 
-    <div id="is-site-body" class="container site-container clearfix">
+    <main class="container-fluid clearfix my-5">
