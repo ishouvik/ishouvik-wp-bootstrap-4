@@ -77,13 +77,14 @@ class ishouvikwp_options
         ) );
 
         $wp_manager->add_control( 'is_site_primary_nav_class', array(
-            'label'      => 'Main Navbar',
-            'section'    => 'site_descriptions',
-            'settings'   => 'is_site_primary_nav_class',
-            'type'       => 'select',
-            'choices'   =>  array(
-                    'default' => 'Default',
-                    'dark' => 'Dark'
+            'label'    => 'Main Navbar',
+            'section'  => 'site_descriptions',
+            'settings' => 'is_site_primary_nav_class',
+            'type'     => 'select',
+            'choices'  =>  array(
+                    'light' => 'Light',
+                    'blue'  => 'Blue',
+                    'dark'  => 'Dark'
             ),
         ) );
 

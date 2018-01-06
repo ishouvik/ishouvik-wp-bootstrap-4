@@ -495,17 +495,20 @@ function is_social( $param = false ) {
  * Logo
 */
 
-function is_logo() {
+function is_navbar_brand() {
     $logo_img = get_theme_mod('is_logo');
     if ( !empty($logo_img) ) { ?>
-        <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>">
-            <img src="<?php echo $logo_img; ?>" class="img-responsive center-block" alt="<?php bloginfo('name'); ?>" />
+        <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
+           <img src="<?php echo $logo_img; ?>" width="30" height="30" alt="<?php bloginfo('name'); ?>" />
         </a>
     <?php } else { ?>
-        <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>"><h1 class="site-title"><?php bloginfo('name'); ?></h1></a>
+        <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
+            <?php bloginfo('name'); ?>
+        </a>
     <?php
     }
 }
+
 
 /**
   *  Primary navigation class
@@ -514,10 +517,16 @@ function is_logo() {
 function is_site_primary_nav_class() {
     $nav_class = get_theme_mod('is_site_primary_nav_class');
 
-    if ($nav_class == 'dark') {
-        echo 'navbar-inverse';
-    } else {
-        echo 'navbar-default';
+    switch ($nav_class) {
+        case 'dark':
+            echo 'navbar-dark bg-dark';
+            break;
+        case 'light':
+            echo 'navbar-light bg-light';
+            break;
+        default: 
+            echo 'navbar-dark bg-primary';
+            break;
     }
 }
 
