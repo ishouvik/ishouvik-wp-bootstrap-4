@@ -492,7 +492,7 @@ function is_social( $param = false ) {
 }
 
 /*
- * Logo
+ * Navbar Brand
 */
 
 function is_navbar_brand() {
@@ -508,7 +508,6 @@ function is_navbar_brand() {
     <?php
     }
 }
-
 
 /**
   *  Primary navigation class
@@ -546,12 +545,10 @@ function is_custom_js() {
     echo $output;
 }
 
-
 /**
  * JetPack Responsive Videos
 */
 add_theme_support( 'jetpack-responsive-videos' );
-
 
 /**
  * Include the TGM_Plugin_Activation class.
