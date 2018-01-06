@@ -22,14 +22,20 @@ main {
 -------------------------------------------------------------- */
 
 /* Articles */
-.post-article {
+article {
   margin: 10px 0;
   padding: 5px 0;
   border-bottom: 1px dotted #dedede;
 }
 
-.post-article h3 {
+article a h3 {
+  color: #333333;
   margin-top: 0;
+}
+
+article h3:hover, article a:hover {
+  color: #0056B3;
+  text-decoration: none;
 }
 
 /* =Elements
