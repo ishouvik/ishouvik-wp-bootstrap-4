@@ -2,7 +2,7 @@
 
 This is a starter Wordpress Theme Skeleton using Twitter Bootstrap 4.0.0-beta.3 and Fontawesome.
 
-Uses Twitter Bootstrap and FontAwesome CDNs for better performance.
+Uses Bootstrap 4 and FontAwesome CDNs for better performance.
 
 I would personally recommend you to create your own Child themes to give your wordpress site a customised look.
 
