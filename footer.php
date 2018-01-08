@@ -6,8 +6,8 @@
  * @subpackage iShouvik WP
  */
 ?>
-        </div> <!-- / #is-site-body .container .clearfix .site-container -->
-        <footer id="is-site-footer" class="site-footer">
+        </main> <!-- / #is-site-body .container .clearfix -->
+        <footer class="site-footer py-3 bg-light border border-white">
             <div class="clearfix">
                 <div class="container">
                     <?php

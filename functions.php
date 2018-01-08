@@ -429,36 +429,77 @@ add_filter('excerpt_more', 'ishouvik_excerpt_more');
  * Numbered Pagination
 */
 function ishouvik_pagination() {
-    global $wp_query;
-
-    // Don't print empty markup if there's only one page.
-    if ( $wp_query->max_num_pages < 2 )
+   if( is_singular() )
         return;
-    ?>
-    <nav>
-        <ul class="pager">
-            <?php if ( get_next_posts_link() ) : ?>
-                <li class="previous">
-                    <?php next_posts_link( __( '&larr; Older posts' ) ); ?>
-                </li>
-            <?php else: ?>
-                <li class="previous disabled">
-                    <a href="#">&larr; Older posts</a>
-                </li>
-            <?php endif; ?>
+ 
+    global $wp_query;
+ 
+    /** Stop execution if there's only 1 page */
+    if( $wp_query->max_num_pages <= 1 )
+        return;
+ 
+    $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
+    $max   = intval( $wp_query->max_num_pages );
+ 
+    /** Add current page to the array */
+    if ( $paged >= 1 )
+        $links[] = $paged;
+ 
+    /** Add the pages around the current page to the array */
+    if ( $paged >= 3 ) {
+        $links[] = $paged - 1;
+        $links[] = $paged - 2;
+    }
+ 
+    if ( ( $paged + 2 ) <= $max ) {
+        $links[] = $paged + 2;
+        $links[] = $paged + 1;
+    }
+ 
+    echo '<nav aria-label="Page navigation"><ul class="pagination">' . "\n";
+ 
+    /** Previous Post Link */
+    if ( get_previous_posts_link() )
+        printf( '<li class="page-item">%s</li>' . "\n", get_previous_posts_link() );
+ 
+    /** Link to first page, plus ellipses if necessary */
+    if ( ! in_array( 1, $links ) ) {
+        $class = 1 == $paged ? ' class="active"' : '';
+ 
+        printf( '<li%s><a class="page-link" href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
+ 
+        if ( ! in_array( 2, $links ) )
+            echo '<li>…</li>';
+    }
+ 
+    /** Link to current page, plus 2 pages in either direction if necessary */
+    sort( $links );
+    foreach ( (array) $links as $link ) {
+        $class = $paged == $link ? ' class="active"' : '';
+        printf( '<li%s><a class="page-link" href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
+    }
+ 
+    /** Link to last page, plus ellipses if necessary */
+    if ( ! in_array( $max, $links ) ) {
+        if ( ! in_array( $max - 1, $links ) )
+            echo '<li>…</li>' . "\n";
+ 
+        $class = $paged == $max ? ' class="active"' : '';
+        printf( '<li%s><a class="page-link" href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
+    }
+ 
+    /** Next Post Link */
+    if ( get_next_posts_link() )
+        printf( '<li>%s</li>' . "\n", get_next_posts_link() );
+ 
+    echo '</ul></nav>' . "\n";
+}
 
-            <?php if ( get_previous_posts_link() ) : ?>
-                <li class="next">
-                    <?php previous_posts_link( __( 'Newer posts &rarr;' ) ); ?>
-                </li>
-            <?php else: ?>
-                <li class="next disabled">
-                <a href="#">Newer posts &rarr;</a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-    <?php
+add_filter('next_posts_link_attributes', 'posts_link_attributes');
+add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+
+function posts_link_attributes() {
+    return 'class="page-link"';
 }
 
 /*
@@ -492,17 +533,19 @@ function is_social( $param = false ) {
 }
 
 /*
- * Logo
+ * Navbar Brand
 */
 
-function is_logo() {
+function is_navbar_brand() {
     $logo_img = get_theme_mod('is_logo');
     if ( !empty($logo_img) ) { ?>
-        <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>">
-            <img src="<?php echo $logo_img; ?>" class="img-responsive center-block" alt="<?php bloginfo('name'); ?>" />
+        <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
+           <img src="<?php echo $logo_img; ?>" width="30" height="30" alt="<?php bloginfo('name'); ?>" />
         </a>
     <?php } else { ?>
-        <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>"><h1 class="site-title"><?php bloginfo('name'); ?></h1></a>
+        <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
+            <?php bloginfo('name'); ?>
+        </a>
     <?php
     }
 }
@@ -514,10 +557,16 @@ function is_logo() {
 function is_site_primary_nav_class() {
     $nav_class = get_theme_mod('is_site_primary_nav_class');
 
-    if ($nav_class == 'dark') {
-        echo 'navbar-inverse';
-    } else {
-        echo 'navbar-default';
+    switch ($nav_class) {
+        case 'dark':
+            echo 'navbar-dark bg-dark';
+            break;
+        case 'light':
+            echo 'navbar-light bg-light';
+            break;
+        default: 
+            echo 'navbar-dark bg-primary';
+            break;
     }
 }
 
@@ -537,12 +586,10 @@ function is_custom_js() {
     echo $output;
 }
 
-
 /**
  * JetPack Responsive Videos
 */
 add_theme_support( 'jetpack-responsive-videos' );
-
 
 /**
  * Include the TGM_Plugin_Activation class.

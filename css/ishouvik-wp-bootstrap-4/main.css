@@ -3,29 +3,11 @@
 
 /* Body */
 body {
-  background: #D8D8D8;
+  background: #ffffff;
 }
 
-/* Site Header */
-.site-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  text-align: center;
-  text-shadow: 1px 1px 1px #ffffff;
-}
-.site-title {
-  font-weight: bold;
-}
-.site-description {
-  font-size: 150%;
-}
-
-/* Primary Navbar */
-.is-navbar-primary {
-  margin-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-  border-radius: 0;
+main {
+  min-height: 85vh;
 }
 
 /* Site Intro */
@@ -36,37 +18,24 @@ body {
   background: #f4f4f4;
 }
 
-/* Site Container */
-.site-container {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding-top: 25px;
-  background: #ffffff;
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-
-/* Footer */
-.site-footer {
-  padding: 15px;
-  min-height: 200px;
-  background: #F8F8F8;
-  border-top: 1px solid #E7E7E7;
-}
-
 /* =Post
 -------------------------------------------------------------- */
 
 /* Articles */
-.post-article {
+article {
   margin: 10px 0;
   padding: 5px 0;
   border-bottom: 1px dotted #dedede;
 }
 
-.post-article h3 {
+article a h3 {
+  color: #333333;
   margin-top: 0;
+}
+
+article h3:hover, article a:hover {
+  color: #0056B3;
+  text-decoration: none;
 }
 
 /* =Elements
