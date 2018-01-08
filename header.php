@@ -41,5 +41,5 @@
             <?php get_template_part( 'content', 'site_intro' ); // Site Intro block only for the front page ?>
         </div>
     <?php endif; ?>
-
+    
     <main class="container-fluid clearfix my-5">

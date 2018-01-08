@@ -4,7 +4,7 @@
             <h3><?php the_title();?></h3>
         </a>
 
-        <p class="meta">
+        <p class="meta text-muted">
             <?php echo ishouvikwp_posted_on();?> | <?php echo ishouvik_categories_in(); ?>
         </p>
     </header>
