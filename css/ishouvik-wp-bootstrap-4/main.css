@@ -20,14 +20,6 @@ main {
 
 /* =Post
 -------------------------------------------------------------- */
-
-/* Articles */
-article {
-  margin: 10px 0;
-  padding: 5px 0;
-  border-bottom: 1px dotted #dedede;
-}
-
 article a h3 {
   color: #333333;
   margin-top: 0;
