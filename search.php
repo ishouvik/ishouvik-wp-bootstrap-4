@@ -9,9 +9,9 @@ get_header(); ?>
 
 <div class="row">
     <div id="primary" class="col-lg-8 site-main-content">
-        <div class="well">
-            <header class="post-title">
-                <h1><?php printf( __('Search Results for: %s', 'ishouvikwp'),'<span>' . get_search_query() . '</span>'); ?></h1>
+        <div class="card mb-3">
+            <header class="card-header">
+                <h1><?php printf( __('Search Results for: "<em>%s</em>"', 'ishouvikwp'),'<span>' . get_search_query() . '</span>'); ?></h1>
             </header>
         </div>
 

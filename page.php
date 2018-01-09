@@ -8,22 +8,19 @@
 get_header(); ?>
 <?php while (have_posts()) : the_post(); ?>
 
-  <header class="page-title">
-      <h1><?php the_title();?></h1>
-  </header>
+<div class="card border border-0">
+    <header class="card-header bg-white">
+        <h1><?php the_title();?></h1>
+    </header>
 
-  <div class="clearfix">
-      <?php the_content(); ?>
-  </div>
+    <div class="card-body">
+        <?php the_content(); ?>
+    </div>
 
-  <footer>
-     <p>
-         <?php edit_post_link(__('Edit', 'ishouvikwp') ); ?>
-     </p> 
-  </footer>
-
-  <?php comments_template(); ?>
-
+    <footer class="card-footer bg-white">
+        <?php comments_template(); ?>
+    </footer>
+</div>
 
 <?php endwhile; // end of the loop. ?>
 

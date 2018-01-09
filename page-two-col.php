@@ -8,25 +8,26 @@
  */
 get_header(); ?>
 
-<div id="primary" class="col-md-8 site-main-content">
-  <?php while (have_posts()) : the_post(); ?>
-    <header class="page-title">
-        <h1><?php the_title();?></h1>
-    </header>
+<div class="row">
+    <div id="primary" class="col-md-8">
+        <div class="card border border-0">
+            <?php while (have_posts()) : the_post(); ?>
+                <header class="card-header bg-white">
+                    <h1><?php the_title();?></h1>
+                </header>
 
-    <div class="clearfix">
-        <?php the_content(); ?>
+                <div class="card-body">
+                    <?php the_content(); ?>
+                </div>
+
+                <footer class="card-footer bg-white">
+                    <?php comments_template(); ?>
+                </footer>
+            <?php endwhile; // end of the loop. ?>
+        </div>
     </div>
 
-    <footer>
-       <p>
-           <?php edit_post_link(__('Edit', 'ishouvikwp') ); ?>
-       </p> 
-    </footer>
-    <?php comments_template(); ?>
-  <?php endwhile; // end of the loop. ?>
+    <?php get_sidebar(); ?>
 </div>
-
-<?php get_sidebar(); ?>
 
 <?php get_footer(); // get footer ?>
