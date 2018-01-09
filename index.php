@@ -8,7 +8,7 @@
 get_header(); ?>
 
 <div class="row">
-    <div id="primary" class="col-md-8">
+    <div id="primary" class="site-main-content col-md-8">
         <header class="page-title sr-only">
             <h1>Articles</h1>
         </header>
