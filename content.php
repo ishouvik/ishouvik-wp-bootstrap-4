@@ -1,4 +1,4 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="clearfix card bg-light">
+<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix card bg-light mb-4'); ?>>
     <header class="card-header">
         <a href="<?php the_permalink(); ?>" title="<?php the_title();?>">
             <h3><?php the_title();?></h3>
