@@ -17,6 +17,10 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?> data-spy="scroll" data-target=".bs-docs-sidebar" data-offset="10">
+    <?php if (get_theme_mod('is_page_header') == 'yes'): ?>
+        <?php get_template_part( 'content', 'page_header' ); ?>
+    <?php endif; ?>
+
     <nav id="is-site-navbar-primary" class="navbar navbar-expand-md <?php is_site_primary_nav_class(); ?>">
         <?php is_navbar_brand(); ?>
 
@@ -30,7 +34,7 @@
             <?php get_template_part( 'searchform', 'navbar' ); ?>
         </div>
     </nav>
-    
+
     <?php if (is_front_page() && get_theme_mod('is_site_intro') == 'yes'): ?>
         <div class="site-intro">
             <?php get_template_part( 'content', 'site_intro' ); // Site Intro block only for the front page ?>

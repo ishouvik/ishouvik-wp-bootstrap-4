@@ -94,6 +94,17 @@ add_action('wp_head', 'ishwp_wow_js_loader');
  *
  */
 function ishouvikwp_widgets_init() {
+    register_sidebar(
+        array(
+            'name'          => __('Page Header', 'ishouvikwp'),
+            'id'            => 'page-header',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => "</div>",
+            'before_title'  => '<h4 class="widget-title">',
+            'after_title'   => '</h4>',
+        )
+    );
+
 
     register_sidebar(
         array(
@@ -418,7 +429,7 @@ add_filter('excerpt_length', 'ishouvik_excerpt_length');
 
 function ishouvik_excerpt_more($more) {
     global $post;
-    return '... <div class="clearfix"><a class="btn btn-primary pull-right" href="' . get_permalink($post->ID) . '">Read More</a></div>'; 
+    return '... <div class="clearfix"><a class="btn btn-primary pull-right" href="' . get_permalink($post->ID) . '">Read More</a></div>';
 }
 add_filter('excerpt_more', 'ishouvik_excerpt_more');
 
@@ -431,67 +442,67 @@ add_filter('excerpt_more', 'ishouvik_excerpt_more');
 function ishouvik_pagination() {
    if( is_singular() )
         return;
- 
+
     global $wp_query;
- 
+
     /** Stop execution if there's only 1 page */
     if( $wp_query->max_num_pages <= 1 )
         return;
- 
+
     $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
     $max   = intval( $wp_query->max_num_pages );
- 
+
     /** Add current page to the array */
     if ( $paged >= 1 )
         $links[] = $paged;
- 
+
     /** Add the pages around the current page to the array */
     if ( $paged >= 3 ) {
         $links[] = $paged - 1;
         $links[] = $paged - 2;
     }
- 
+
     if ( ( $paged + 2 ) <= $max ) {
         $links[] = $paged + 2;
         $links[] = $paged + 1;
     }
- 
+
     echo '<nav aria-label="Page navigation"><ul class="pagination">' . "\n";
- 
+
     /** Previous Post Link */
     if ( get_previous_posts_link() )
         printf( '<li class="page-item">%s</li>' . "\n", get_previous_posts_link() );
- 
+
     /** Link to first page, plus ellipses if necessary */
     if ( ! in_array( 1, $links ) ) {
         $class = 1 == $paged ? ' class="active"' : '';
- 
+
         printf( '<li%s><a class="page-link" href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
- 
+
         if ( ! in_array( 2, $links ) )
             echo '<li>…</li>';
     }
- 
+
     /** Link to current page, plus 2 pages in either direction if necessary */
     sort( $links );
     foreach ( (array) $links as $link ) {
         $class = $paged == $link ? ' class="active"' : '';
         printf( '<li%s><a class="page-link" href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
     }
- 
+
     /** Link to last page, plus ellipses if necessary */
     if ( ! in_array( $max, $links ) ) {
         if ( ! in_array( $max - 1, $links ) )
             echo '<li>…</li>' . "\n";
- 
+
         $class = $paged == $max ? ' class="active"' : '';
         printf( '<li%s><a class="page-link" href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
     }
- 
+
     /** Next Post Link */
     if ( get_next_posts_link() )
         printf( '<li>%s</li>' . "\n", get_next_posts_link() );
- 
+
     echo '</ul></nav>' . "\n";
 }
 
@@ -538,16 +549,18 @@ function is_social( $param = false ) {
 
 function is_navbar_brand() {
     $logo_img = get_theme_mod('is_logo');
-    if ( !empty($logo_img) ) { ?>
-        <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
-           <img src="<?php echo $logo_img; ?>" width="30" height="30" alt="<?php bloginfo('name'); ?>" />
-        </a>
-    <?php } else { ?>
-        <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
-            <?php bloginfo('name'); ?>
-        </a>
-    <?php
-    }
+    if (get_theme_mod('is_navbar_brand') == 'yes'):
+        if ( !empty($logo_img) ) { ?>
+            <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
+               <img src="<?php echo $logo_img; ?>" width="30" height="30" alt="<?php bloginfo('name'); ?>" />
+            </a>
+        <?php } else { ?>
+            <a class="navbar-brand" title="<?php bloginfo('name'); ?>" href="<?php echo esc_url( home_url('/') ); ?>">
+                <?php bloginfo('name'); ?>
+            </a>
+        <?php
+        }
+    endif;
 }
 
 /**
@@ -564,7 +577,7 @@ function is_site_primary_nav_class() {
         case 'light':
             echo 'navbar-light bg-light';
             break;
-        default: 
+        default:
             echo 'navbar-dark bg-primary';
             break;
     }
@@ -595,7 +608,7 @@ add_theme_support( 'jetpack-responsive-videos' );
  * Include the TGM_Plugin_Activation class.
  */
 require_once dirname( __FILE__ ) . '/includes/class-tgm-plugin-activation.php';
- 
+
 add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
 /**
  * Register the required plugins for this theme.
@@ -610,7 +623,7 @@ add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
  * TGM_Plugin_Activation class constructor.
  */
 function my_theme_register_required_plugins() {
- 
+
     /**
      * Array of plugin arrays. Required keys are name and slug.
      * If the source is NOT from the .org repo, then source is also required.
@@ -642,7 +655,7 @@ function my_theme_register_required_plugins() {
             'required'  => false
         ),
     );
- 
+
     /**
      * Array of configuration settings. Amend each line as needed.
      * If you want the default strings to be available under your own theme domain,
@@ -679,7 +692,7 @@ function my_theme_register_required_plugins() {
             'nag_type'                        => 'updated' // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
         )
     );
- 
+
     tgmpa( $plugins, $config );
- 
+
 }

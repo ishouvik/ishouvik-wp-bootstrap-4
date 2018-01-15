@@ -40,17 +40,61 @@ class ishouvikwp_options
             'priority'       => 36,
         ) );
 
+        // Site Header control
+        $wp_manager->add_setting( 'is_page_header', array(
+            'default'        => 'yes',
+        ) );
 
-        // Site Logo control
+        $wp_manager->add_control( 'is_page_header', array(
+            'label'      => 'Page header',
+            'section'    => 'site_descriptions',
+            'settings'   => 'is_page_header',
+            'type'       => 'select',
+            'choices'   =>  array(
+                    'yes' => 'Yes',
+                    'no' => 'No'
+            ),
+        ) );
+
+        // Site Header Logo control
+        $wp_manager->add_setting( 'is_page_header_logo', array(
+            'default'        => '',
+        ) );
+
+        $wp_manager->add_control( 'is_page_header_logo', array(
+            'label'      => 'Page Header Logo URL',
+            'section'    => 'site_descriptions',
+            'settings'   => 'is_page_header_logo',
+            'type'       => 'text',
+        ) );
+
+
+        // Site Navbar Logo control
         $wp_manager->add_setting( 'is_logo', array(
             'default'        => '',
         ) );
 
         $wp_manager->add_control( 'is_logo', array(
-            'label'      => 'Logo URL',
+            'label'      => 'Navbar Logo URL',
             'section'    => 'site_descriptions',
             'settings'   => 'is_logo',
             'type'       => 'text',
+        ) );
+
+        // Site Navbar Brand Control
+        $wp_manager->add_setting( 'is_navbar_brand', array(
+            'default'        => 'yes',
+        ) );
+
+        $wp_manager->add_control( 'is_navbar_brand', array(
+            'label'      => 'Display Navbar Brand?',
+            'section'    => 'site_descriptions',
+            'settings'   => 'is_navbar_brand',
+            'type'       => 'select',
+            'choices'   =>  array(
+                    'yes' => 'Yes',
+                    'no' => 'No'
+            ),
         ) );
 
 
@@ -60,7 +104,7 @@ class ishouvikwp_options
         ) );
 
         $wp_manager->add_control( 'is_site_intro', array(
-            'label'      => 'Site Intro',
+            'label'      => 'Display Site Intro?',
             'section'    => 'site_descriptions',
             'settings'   => 'is_site_intro',
             'type'       => 'select',
@@ -253,7 +297,7 @@ class ishouvikwp_options
         ) );
 
 
-        // Custom CSS 
+        // Custom CSS
         $wp_manager->add_setting( 'is_custom_css', array(
             'default'        => '',
         ) );
