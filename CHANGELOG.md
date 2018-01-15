@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ### 0.2 2017 - 01 - 15
 ### ADDED
 - Header widget area
+- Hotfix: Content post class
 
 
 ### 0.2 2017 - 01 - 09
